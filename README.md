@@ -52,6 +52,10 @@ Qrcode::make('QR Code')
 
 ![Logo & background](https://i.imgur.com/ppVi4jn.png)
 
+## Related
+
+- [Nova QR Code Manager](https://github.com/Kristories/nova-qrcode-manager)
+
 ## Credits
 
 - [vue-qr](https://github.com/Binaryify/vue-qr)
