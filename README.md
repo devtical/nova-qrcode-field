@@ -17,6 +17,7 @@ composer require kristories/nova-qrcode-field
 ```php
 Qrcode::make('QR Code')
     ->text('http://laravel.com')
+    ->exceptOnForms()
 ```
 
 ![Basic](https://i.imgur.com/V15fjwl.png)
@@ -27,6 +28,7 @@ Qrcode::make('QR Code')
 Qrcode::make('QR Code')
     ->text('http://laravel.com')
     ->logo('http://source.to/logo.png')
+    ->exceptOnForms()
 ```
 
 ![Logo](https://i.imgur.com/YFlAvo3.png)
@@ -37,6 +39,7 @@ Qrcode::make('QR Code')
 Qrcode::make('QR Code')
     ->text('http://laravel.com')
     ->background('http://source.to/background.png')
+    ->exceptOnForms()
 ```
 
 ![Background](https://i.imgur.com/nAbuKCc.png)
@@ -48,6 +51,7 @@ Qrcode::make('QR Code')
     ->text('http://laravel.com')
     ->logo('http://source.to/logo.png')
     ->background('http://source.to/background.png')
+    ->exceptOnForms()
 ```
 
 ![Logo & background](https://i.imgur.com/ppVi4jn.png)
