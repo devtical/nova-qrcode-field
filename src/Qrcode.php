@@ -13,6 +13,12 @@ class Qrcode extends Field
      * @var string
      */
     public $component = 'qrcode';
+    
+    
+    public function __construct()
+    {
+        $this->exceptOnForms();
+    }
 
     public function text($text = null)
     {
