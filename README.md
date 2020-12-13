@@ -21,6 +21,16 @@ Qrcode::make('QR Code')
 
 ![Basic](https://i.imgur.com/V15fjwl.png)
 
+#### Setting sizes
+
+```php
+Qrcode::make('QR Code')
+    ->text('http://laravel.com')
+    ->indexSize(100)
+    ->detailSize(500)
+```
+
+
 #### With logo
 
 ```php

@@ -4,10 +4,10 @@
             <vue-qr 
                 class="qr-item" 
                 :text="this.field.text" 
-                size="200" 
+                :size="this.field.detailSize"
                 :bgSrc="this.field.background"
                 :logoSrc="this.field.logo"
-                margin="0"
+                :margin="0"
             ></vue-qr>
         </p>
     </panel-item>

@@ -3,10 +3,10 @@
     	<vue-qr 
             class="qr-item" 
             :text="this.field.text" 
-            size="50" 
+            :size="this.field.indexSize"
             :bgSrc="this.field.background"
             :logoSrc="this.field.logo"
-            margin="0"
+            :margin="0"
         ></vue-qr>
     </span>
 </template>
