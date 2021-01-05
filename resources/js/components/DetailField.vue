@@ -1,12 +1,12 @@
 <template>
     <panel-item :field="field">
         <p slot="value">
-            <vue-qr 
-                class="qr-item" 
-                :text="this.field.text" 
-                :size="this.field.detailSize"
-                :bgSrc="this.field.background"
-                :logoSrc="this.field.logo"
+            <vue-qr
+                class="qr-item"
+                :text="field.value"
+                :size="field.detailSize"
+                :bgSrc="field.background"
+                :logoSrc="field.logo"
                 :margin="0"
             ></vue-qr>
         </p>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style>
-.qr-item img{
+.qr-item img {
     border: solid thin #ddd;
     padding: 5px;
 }
