@@ -15,8 +15,7 @@ composer require kristories/nova-qrcode-field
 #### Basic
 
 ```php
-Qrcode::make('QR Code')
-    ->text('http://laravel.com')
+Qrcode::make('QR Code', 'url')
 ```
 
 ![Basic](https://i.imgur.com/V15fjwl.png)
@@ -24,8 +23,7 @@ Qrcode::make('QR Code')
 #### Setting sizes
 
 ```php
-Qrcode::make('QR Code')
-    ->text('http://laravel.com')
+Qrcode::make('QR Code', 'url')
     ->indexSize(100)
     ->detailSize(500)
 ```
@@ -34,8 +32,7 @@ Qrcode::make('QR Code')
 #### With logo
 
 ```php
-Qrcode::make('QR Code')
-    ->text('http://laravel.com')
+Qrcode::make('QR Code', 'url')
     ->logo('http://source.to/logo.png')
 ```
 
@@ -44,8 +41,7 @@ Qrcode::make('QR Code')
 #### With background
 
 ```php
-Qrcode::make('QR Code')
-    ->text('http://laravel.com')
+Qrcode::make('QR Code', 'url')
     ->background('http://source.to/background.png')
 ```
 
@@ -54,8 +50,7 @@ Qrcode::make('QR Code')
 #### With logo & background
 
 ```php
-Qrcode::make('QR Code')
-    ->text('http://laravel.com')
+Qrcode::make('QR Code', 'url')
     ->logo('http://source.to/logo.png')
     ->background('http://source.to/background.png')
 ```
