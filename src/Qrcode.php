@@ -13,23 +13,22 @@ class Qrcode extends Field
      * @var string
      */
     public $component = 'qrcode';
-    
-    
-    public function __construct()
-    {
-        $this->exceptOnForms()
-             ->indexSize(50)
-             ->detailSize(200);
-    }
 
-    public function text($text = null)
+    /**
+     * @param  mixed  ...$attributes
+     */
+    public function __construct(...$attributes)
     {
-        return $this->withMeta(['text' => $text]);
+        parent::__construct(...$attributes);
+
+        $this
+            ->exceptOnForms()
+            ->indexSize(50)
+            ->detailSize(200);
     }
 
     public function background($background = null)
     {
-
         return $this->withMeta(['background' => $this->_renderImage($background)]);
     }
 
@@ -51,17 +50,29 @@ class Qrcode extends Field
     protected function _renderImage($url = null)
     {
         if ($url and curl_init($url)) {
-            $image = Cache::rememberForever('qr-img-' . md5($url), function () use ($url) {
-                $image     = file_get_contents($url);
+            $image = Cache::rememberForever('qr-img-'.md5($url), function () use ($url) {
+                $image = file_get_contents($url);
                 $file_info = new \finfo(FILEINFO_MIME_TYPE);
                 $mime_type = $file_info->buffer($image);
 
-                return 'data: ' . $mime_type . ';base64,' . base64_encode(file_get_contents($url));
+                return 'data: '.$mime_type.';base64,'.base64_encode(file_get_contents($url));
             });
 
             return $image;
         }
 
         return false;
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return array_merge(parent::jsonSerialize(), [
+            'value' => (string) $this->value,
+        ]);
     }
 }
