@@ -12,6 +12,10 @@ composer require kristories/nova-qrcode-field
 
 ## Usage
 
+```
+use Kristories\Qrcode\Qrcode;
+```
+
 #### Basic
 
 ```php
