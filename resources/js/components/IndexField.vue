@@ -1,8 +1,8 @@
 <template>
     <span>
-    	<vue-qr 
-            class="qr-item" 
-            :text="this.field.text" 
+    	<vue-qr
+            class="qr-item"
+            :text="this.field.value"
             :size="this.field.indexSize"
             :bgSrc="this.field.background"
             :logoSrc="this.field.logo"
@@ -14,7 +14,7 @@
 <script>
 export default {
     props: [
-    	'resourceName', 
+    	'resourceName',
     	'field'
     ],
 }
