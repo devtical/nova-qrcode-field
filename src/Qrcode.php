@@ -2,7 +2,7 @@
 
 namespace Kristories\Qrcode;
 
-use Cache;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\Field;
 
 class Qrcode extends Field

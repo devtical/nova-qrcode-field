@@ -14,8 +14,12 @@
 </template>
 
 <script>
+import VueQr from 'vue-qr/src/packages/vue-qr.vue'
 export default {
     props: ['field'],
+    components: {
+        VueQr
+    }
 }
 </script>
 
