@@ -102,5 +102,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# IDE
+.idea
 
 # End of https://www.gitignore.io/api/git,laravel,macos,windows,linux

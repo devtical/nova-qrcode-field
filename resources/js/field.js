@@ -1,7 +1,7 @@
-import VueQr from 'vue-qr'
+import IndexField from './components/IndexField'
+import DetailField from './components/DetailField'
 
-Nova.booting((Vue, router) => {
-	Vue.component('vue-qr', VueQr);
-    Vue.component('index-qrcode', require('./components/IndexField'));
-    Vue.component('detail-qrcode', require('./components/DetailField'));
+Nova.booting((app, store) => {
+    app.component('index-qrcode-field', IndexField)
+    app.component('detail-qrcode-field', DetailField)
 })
