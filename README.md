@@ -2,68 +2,69 @@
 
 A Laravel Nova field to generate QR Code.
 
+![Logo & background](art/cover.png)
+
 ## Installation
 
 You can install the Nova field in to a [Laravel](http://laravel.com) app that uses [Nova](http://nova.laravel.com) via composer :
 
 ```cli
-composer require kristories/nova-qrcode-field
+composer require devtical/nova-qrcode-field
 ```
 
 ## Usage
 
 ```
-use Kristories\Qrcode\Qrcode;
+use Devtical\Qrcode\Qrcode;
 ```
 
 #### Basic
 
 ```php
-Qrcode::make('QR Code', 'url')
+Qrcode::make('QR Code', 'field')
 ```
-
-![Basic](https://i.imgur.com/V15fjwl.png)
 
 #### Setting sizes
 
 ```php
-Qrcode::make('QR Code', 'url')
+Qrcode::make('QR Code', 'field')
     ->indexSize(100)
     ->detailSize(500)
 ```
 
+![Size](art/1-size.png)
 
 #### With logo
 
 ```php
-Qrcode::make('QR Code', 'url')
+Qrcode::make('QR Code', 'field')
     ->logo('http://source.to/logo.png')
 ```
 
-![Logo](https://i.imgur.com/YFlAvo3.png)
+![Logo](art/2-logo.png)
 
 #### With background
 
 ```php
-Qrcode::make('QR Code', 'url')
+Qrcode::make('QR Code', 'field')
     ->background('http://source.to/background.png')
 ```
 
-![Background](https://i.imgur.com/nAbuKCc.png)
+![Background](art/3-background.png)
 
 #### With logo & background
 
 ```php
-Qrcode::make('QR Code', 'url')
+Qrcode::make('QR Code', 'field')
     ->logo('http://source.to/logo.png')
     ->background('http://source.to/background.png')
 ```
 
-![Logo & background](https://i.imgur.com/ppVi4jn.png)
+![Logo & background](art/4-logo-background.png)
 
 ## Related
 
-- [Nova QR Code Manager](https://github.com/Kristories/nova-qrcode-manager)
+- [Nova QR Code Manager](https://github.com/Devtical/nova-qrcode-manager)
 
 ## Credits
 

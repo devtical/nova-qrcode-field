@@ -1,6 +1,6 @@
 <template>
-    <panel-item :field="field">
-        <p slot="value">
+    <PanelItem :index="index" :field="field">
+        <template #value>
             <vue-qr
                 class="qr-item"
                 :text="field.value"
@@ -9,14 +9,14 @@
                 :logoSrc="field.logo"
                 :margin="0"
             ></vue-qr>
-        </p>
-    </panel-item>
+        </template>
+    </PanelItem>
 </template>
 
 <script>
 import VueQr from 'vue-qr/src/packages/vue-qr.vue'
 export default {
-    props: ['field'],
+    props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
     components: {
         VueQr
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kristories\Qrcode;
+namespace Devtical\Qrcode;
 
 use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\Field;
