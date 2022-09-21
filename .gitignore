@@ -1,5 +1,3 @@
-# Created by https://www.gitignore.io/api/git,laravel,macos,windows,linux
-
 ### Git ###
 # Created by git for backups. To disable backups in Git:
 # $ git config --global mergetool.keepBackup false
@@ -104,5 +102,4 @@ $RECYCLE.BIN/
 
 # IDE
 .idea
-
-# End of https://www.gitignore.io/api/git,laravel,macos,windows,linux
+.php-cs-fixer.cache
