@@ -7,7 +7,7 @@
                 :size="field.detailSize"
                 :bgSrc="field.background"
                 :logoSrc="field.logo"
-                :margin="0"
+                :margin="field.padding"
             ></vue-qr>
         </template>
     </PanelItem>
