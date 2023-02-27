@@ -6,7 +6,7 @@
             :size="this.field.indexSize"
             :bgSrc="this.field.background"
             :logoSrc="this.field.logo"
-            :margin="this.field.padding"
+            :margin="this.field.margin"
         ></vue-qr>
     </span>
 </template>

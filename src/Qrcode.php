@@ -23,7 +23,7 @@ class Qrcode extends Field
 
         $this
             ->exceptOnForms()
-            ->padding(0)
+            ->margin(0)
             ->indexSize(50)
             ->detailSize(200);
     }
@@ -48,9 +48,9 @@ class Qrcode extends Field
         return $this->withMeta(['detailSize' => $size]);
     }
 
-    public function padding(int $size)
+    public function margin(int $size)
     {
-        return $this->withMeta(['padding' => $size]);
+        return $this->withMeta(['margin' => $size]);
     }
 
     protected function _renderImage($url = null)
