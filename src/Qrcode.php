@@ -56,12 +56,12 @@ class Qrcode extends Field
     protected function _renderImage($url = null)
     {
         if ($url and curl_init($url)) {
-            $image = Cache::rememberForever('qr-img-' . md5($url), function () use ($url) {
+            $image = Cache::rememberForever('qr-img-'.md5($url), function () use ($url) {
                 $image = file_get_contents($url);
                 $file_info = new \finfo(FILEINFO_MIME_TYPE);
                 $mime_type = $file_info->buffer($image);
 
-                return 'data: ' . $mime_type . ';base64,' . base64_encode(file_get_contents($url));
+                return 'data: '.$mime_type.';base64,'.base64_encode(file_get_contents($url));
             });
 
             return $image;
@@ -71,9 +71,7 @@ class Qrcode extends Field
     }
 
     /**
-     * @inheritdoc
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function jsonSerialize(): array
     {
