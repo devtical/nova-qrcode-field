@@ -1,49 +1,24 @@
-name: format
+name: Format
 
 on: [push, pull_request]
 
 jobs:
-    test:
-        runs-on: ${{ matrix.os }}
-        strategy:
-            fail-fast: true
-            matrix:
-                os: [ubuntu-latest]
-                php: [8.2, 8.1, 8.0, 7.4]
-                laravel: [7.*, 8.*, 9.*]
-                dependency-version: [prefer-stable]
-                include:
-                    -   laravel: 9.*
-                        testbench: 7.*
-                    -   laravel: 8.*
-                        testbench: 6.*
-                    -   laravel: 7.*
-                        testbench: 5.*
-                exclude:
-                    -   laravel: 9.*
-                        php: 7.4   
-                    -   laravel: 7.*
-                        php: 8.1  
-
-        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+    php-cs-fixer:
+        runs-on: ubuntu-latest
 
         steps:
-            -   name: Checkout code
-                uses: actions/checkout@v2
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-                    coverage: none
+            - name: Run Pint
+              uses: aglipanci/laravel-pint-action@2.0.0
+              with:
+                preset: laravel
+                configPath: "pint.json"
 
-            -   name: Install dependencies
-                run: |
-                    composer require "laravel/framework:${{ matrix.laravel }}" "nesbot/carbon:^2.63" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
-                env:
-                  COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
-
-            -   name: Format
-                run: composer format
+            - name: Commit changes
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: Fix styling
