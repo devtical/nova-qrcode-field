@@ -19,6 +19,7 @@
     "vue-loader": "^16.8.3"
   },
   "dependencies": {
-    "vue-qr": "^4.0.6"
+    "awesome-qr": "^2.1.5-rc.0",
+    "html2canvas": "^1.4.1"
   }
 }
