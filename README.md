@@ -18,23 +18,40 @@ composer require devtical/nova-qrcode-field
 use Devtical\Qrcode\Qrcode;
 ```
 
-#### Basic
+#### Basic QR Code
+
+To create a basic QR code with default settings:
 
 ```php
 Qrcode::make('QR Code', 'field')
 ```
 
-#### Setting sizes
+#### Setting QR Code Sizes
+
+Specify the sizes for index and detail views:
 
 ```php
 Qrcode::make('QR Code', 'field')
-    ->indexSize(100)
-    ->detailSize(500)
+    ->indexSize(100)     // QR size for index view
+    ->detailSize(500)    // QR size for detail view
 ```
 
 ![Size](art/1-size.png)
 
-#### With logo
+### Margin Customization
+
+Control the padding around the QR code for optimal appearance:
+
+```php
+Qrcode::make('QR Code', 'field')
+    ->margin(10)
+```
+
+The margin value for the QR code adjusts based on its size: if the size is greater than `250`, it uses the margin value specified in `->margin()`, otherwise it defaults to a margin value of `1`.
+
+### Adding a Logo
+
+Add a logo to the center of the QR code:
 
 ```php
 Qrcode::make('QR Code', 'field')
@@ -43,7 +60,9 @@ Qrcode::make('QR Code', 'field')
 
 ![Logo](art/2-logo.png)
 
-#### With background
+### Setting a Background Image
+
+Set a background image for the QR code:
 
 ```php
 Qrcode::make('QR Code', 'field')
@@ -52,7 +71,9 @@ Qrcode::make('QR Code', 'field')
 
 ![Background](art/3-background.png)
 
-#### With logo & background
+### Combining Logo & Background
+
+Include both a logo and a background image for the QR code:
 
 ```php
 Qrcode::make('QR Code', 'field')
