@@ -1,35 +1,34 @@
 <template>
     <span>
-    	<vue-qr
-            class="qr-item"
-            :text="this.field.value"
-            :size="this.field.indexSize"
-            :bgSrc="this.field.background"
-            :logoSrc="this.field.logo"
-            :margin="this.field.margin"
-        ></vue-qr>
+        <div ref="qrContainer" class="qr-item"></div>
     </span>
 </template>
 
 <script>
-import VueQr from 'vue-qr/src/packages/vue-qr.vue'
+import { AwesomeQR } from 'awesome-qr';
+
 export default {
     props: [
-    	'resourceName',
-    	'field'
+        'resourceName',
+        'field'
     ],
-    components: {
-        VueQr
+    mounted() {
+        this.generateQRCode();
+    },
+    methods: {
+        async generateQRCode() {
+            const qrCode = new AwesomeQR({
+                text: this.field.value,
+                size: this.field.indexSize,
+                margin: this.field.indexSize > 250 ? this.field.margin : 1,
+                backgroundImage: this.field.background || null,
+                logoImage: this.field.logo || null,
+                logoMargin: this.field.indexSize > 250 ? 10 : 0,
+            });
+
+            const qrCodeImage = await qrCode.draw();
+            this.$refs.qrContainer.innerHTML = `<img src="${qrCodeImage}" alt="${this.field.value}" />`;
+        }
     }
 }
 </script>
-
-<style>
-.qr-item{
-	margin-top: 5px;
-}
-.qr-item img{
-    border: solid thin #ddd;
-    padding: 2px;
-}
-</style>
