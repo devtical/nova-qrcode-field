@@ -2,6 +2,33 @@
 
 All notable changes to `laravel-helpers` will be documented in this file.
 
+## v2.0.3 - 2024-11-11
+
+### [v2.0.3]
+
+#### Added
+
+- **Dynamic Margin Adjustment**: QR code margin now adjusts automatically based on the QR code size. If the size is greater than `250`, it applies the value specified in `->margin()`, and defaults to `1` for sizes `250` or smaller.
+
+#### Changed
+
+- **Dependency Update**: Migrated QR code generation from `vue-qr` to `Awesome-qr.js`, enabling enhanced customization options for QR codes, including support for background images, logo images, and dynamic styling options.
+
+#### Documentation
+
+- Updated README with examples showcasing dynamic margin settings, logo and background configuration, and usage instructions for `Awesome-qr.js`.
+- Added notes on customizing margin based on size and details of the migration to `Awesome-qr.js`.
+
+#### Credits
+
+- Special thanks to the developers of [vue-qr](https://github.com/Binaryify/vue-qr) for their previous library support.
+- Kudos to [Awesome-qr.js](https://github.com/SumiMakito/Awesome-qr.js) for providing improved customization features.
+
+
+---
+
+**Upgrade Note**: For existing users, please replace any `vue-qr` references with the new settings and ensure you update your `composer.json` file with `devtical/nova-qrcode-field` v2.0.3 to apply these enhancements.
+
 ## v2.0.2 - 2023-11-25
 
 **Full Changelog**: https://github.com/devtical/nova-qrcode-field/compare/v2.0.1...v2.0.2
