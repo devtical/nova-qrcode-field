@@ -1,5 +1,8 @@
 # Nova QR Code
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/laravel-drunk-on-419)
+[![Total Downloads](https://img.shields.io/packagist/dt/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/laravel-drunk-on-419)
+
 A Laravel Nova field to generate QR Code.
 
 ![Logo & background](art/cover.png)
