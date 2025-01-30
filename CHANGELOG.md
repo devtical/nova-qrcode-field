@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-helpers` will be documented in this file.
 
+## v2.0.5 - 2025-01-30
+
+### What's Changed
+
+* Support hideWhen by @Kristories in https://github.com/devtical/nova-qrcode-field/pull/26
+
+**Full Changelog**: https://github.com/devtical/nova-qrcode-field/compare/v2.0.4...v2.0.5
+
 ## v2.0.4 - 2025-01-30
 
 ### What's Changed
