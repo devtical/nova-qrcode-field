@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span v-if="!field.hidden">
         <div ref="qrContainer" class="qr-item"></div>
     </span>
 </template>
