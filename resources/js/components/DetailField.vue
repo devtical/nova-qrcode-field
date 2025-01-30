@@ -1,5 +1,5 @@
 <template>
-    <PanelItem :index="index" :field="field">
+    <PanelItem v-if="!field.hidden" :index="index" :field="field">
         <template #value>
             <div ref="qrContainer" class="qr-item"></div>
             <p class="flex items-center text-sm mt-3">

@@ -108,8 +108,33 @@ class Qrcode extends Field
      */
     public function jsonSerialize(): array
     {
-        return array_merge(parent::jsonSerialize(), [
+        $data = parent::jsonSerialize();
+
+        if (! empty($this->meta['hidden']) && is_callable($this->meta['hidden'])) {
+            $isHidden = call_user_func($this->meta['hidden'], $this->resource);
+            if ($isHidden) {
+                $data['value'] = null;
+            }
+        }
+
+        return array_merge($data, [
             'value' => (string) $this->value,
+        ]);
+    }
+
+    /**
+     * Hide the field when the given condition is met.
+     *
+     * @return $this
+     */
+    public function hideWhen(callable $callback)
+    {
+        return $this->withMeta([
+            'hidden' => function () use ($callback) {
+                $resource = $this->resource ?? null;
+
+                return $resource ? $callback($resource) : false;
+            },
         ]);
     }
 }

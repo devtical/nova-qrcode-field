@@ -86,6 +86,21 @@ Qrcode::make('QR Code', 'field')
 
 ![Logo & background](art/4-logo-background.png)
 
+## Dynamic Field Visibility
+
+You can dynamically hide the QR Code field based on another field's value:
+
+#### Hiding the Field Conditionally
+
+Use `hideWhen()` to hide the QR Code field when a condition is met:
+
+```php
+Qrcode::make('QR Code', 'code')
+    ->hideWhen(function ($resource) {
+        return $resource->status === 0; // Hide if status is inactive
+    });
+```
+
 ## Related
 
 - [Nova QR Code Manager](https://github.com/Devtical/nova-qrcode-manager)
