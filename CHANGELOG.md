@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-helpers` will be documented in this file.
 
+## v2.0.4 - 2025-01-30
+
+### What's Changed
+
+* Fix #24 by @Kristories in https://github.com/devtical/nova-qrcode-field/pull/25
+
+**Full Changelog**: https://github.com/devtical/nova-qrcode-field/compare/v2.0.3...v2.0.4
+
 ## v2.0.3 - 2024-11-11
 
 ### [v2.0.3]
