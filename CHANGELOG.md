@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-helpers` will be documented in this file.
 
+## V2.0.6 - 2025-07-12
+
+### What's Changed
+
+* Support Laravel 12 by @Kristories in https://github.com/devtical/nova-qrcode-field/pull/28
+
+**Full Changelog**: https://github.com/devtical/nova-qrcode-field/compare/v2.0.5...v2.0.6
+
 ## v2.0.5 - 2025-01-30
 
 ### What's Changed
