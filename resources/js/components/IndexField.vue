@@ -1,34 +1,27 @@
 <template>
     <span v-if="!field.hidden">
-        <div ref="qrContainer" class="qr-item"></div>
+        <div class="qr-item">
+            <img v-if="image" :src="image" :alt="field.value" />
+        </div>
     </span>
 </template>
 
 <script>
-import { AwesomeQR } from 'awesome-qr';
+import { drawQrCode } from '../qrcode'
 
 export default {
-    props: [
-        'resourceName',
-        'field'
-    ],
-    mounted() {
-        this.generateQRCode();
-    },
-    methods: {
-        async generateQRCode() {
-            const qrCode = new AwesomeQR({
-                text: this.field.value,
-                size: this.field.indexSize,
-                margin: this.field.indexSize > 250 ? this.field.margin : 1,
-                backgroundImage: this.field.background || null,
-                logoImage: this.field.logo || null,
-                logoMargin: this.field.indexSize > 250 ? 10 : 0,
-            });
+    props: ['resourceName', 'field'],
 
-            const qrCodeImage = await qrCode.draw();
-            this.$refs.qrContainer.innerHTML = `<img src="${qrCodeImage}" alt="${this.field.value}" />`;
+    data: () => ({
+        image: null,
+    }),
+
+    async mounted() {
+        if (this.field.hidden || !this.field.value) {
+            return
         }
-    }
+
+        this.image = await drawQrCode(this.field, this.field.indexSize)
+    },
 }
 </script>
