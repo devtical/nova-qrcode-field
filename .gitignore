@@ -103,3 +103,8 @@ $RECYCLE.BIN/
 # IDE
 .idea
 .php-cs-fixer.cache
+
+### Package ###
+composer.lock
+.phpunit.result.cache
+.phpunit.cache/

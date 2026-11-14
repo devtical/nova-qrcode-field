@@ -10,19 +10,29 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0|^11.0|^12.0"
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0"
     },
     "require-dev": {
         "laravel/nova": "^5.0",
         "laravel/nova-devtool": "^1.8",
-        "laravel/pint": "^1.18"
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^10.5|^11.0|^12.0"
     },
     "repositories": [
-        { "type": "composer", "url": "https://nova.laravel.com" }
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
     ],
     "autoload": {
         "psr-4": {
             "Devtical\\Qrcode\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Devtical\\Qrcode\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -36,8 +46,9 @@
         "sort-packages": true
     },
     "scripts": {
-        "format": "vendor/bin/pint"
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/phpunit"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
