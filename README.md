@@ -1,7 +1,6 @@
 # Nova QR Code
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/nova-qrcode-field)
-[![Tests](https://img.shields.io/github/actions/workflow/status/devtical/nova-qrcode-field/tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/devtical/nova-qrcode-field/actions/workflows/tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/nova-qrcode-field)
 
 A Laravel Nova field to generate QR Code.
