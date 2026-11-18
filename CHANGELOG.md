@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `laravel-helpers` will be documented in this file.
+All notable changes to `nova-qrcode-field` will be documented in this file.
 
 ## V2.0.6 - 2025-07-12
 

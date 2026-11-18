@@ -1,9 +1,15 @@
 # Nova QR Code
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/laravel-drunk-on-419)
-[![Total Downloads](https://img.shields.io/packagist/dt/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/laravel-drunk-on-419)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/nova-qrcode-field)
+[![Total Downloads](https://img.shields.io/packagist/dt/devtical/nova-qrcode-field.svg?style=flat-square)](https://packagist.org/packages/devtical/nova-qrcode-field)
 
 A Laravel Nova field to generate QR Code.
+
+## Requirements
+
+- PHP 8.2+
+- Laravel 10, 11, 12 or 13
+- Laravel Nova 5
 
 ![Logo & background](art/cover.png)
 
@@ -17,7 +23,7 @@ composer require devtical/nova-qrcode-field
 
 ## Usage
 
-```
+```php
 use Devtical\Qrcode\Qrcode;
 ```
 
@@ -101,13 +107,22 @@ Qrcode::make('QR Code', 'code')
     });
 ```
 
+When the condition is met, the QR code value is not sent to the browser at all.
+
+Images passed to `logo()` and `background()` are downloaded once and cached forever. Failed downloads are not cached, so they are retried on the next request.
+
+## Testing
+
+```bash
+composer test
+```
+
 ## Related
 
 - [Nova QR Code Manager](https://github.com/Devtical/nova-qrcode-manager)
 
 ## Credits
 
-- [vue-qr](https://github.com/Binaryify/vue-qr)
 - [Awesome-qr.js](https://github.com/SumiMakito/Awesome-qr.js)
 
 ## License

@@ -2,23 +2,17 @@
 
 namespace Devtical\Qrcode;
 
+use Closure;
+use finfo;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\Field;
 
 class Qrcode extends Field
 {
-    /**
-     * The field's component.
-     *
-     * @var string
-     */
     public $component = 'qrcode';
 
-    /**
-     * Constructor for the Qrcode field.
-     *
-     * @param  mixed  ...$attributes
-     */
+    protected ?Closure $hideCallback = null;
+
     public function __construct(...$attributes)
     {
         parent::__construct(...$attributes);
@@ -29,112 +23,89 @@ class Qrcode extends Field
             ->detailSize(300);
     }
 
-    /**
-     * Set the background image for the QR code.
-     *
-     * @return $this
-     */
-    public function background(?string $background = null)
+    public function background(?string $background = null): static
     {
         return $this->withMeta(['background' => $this->renderImage($background)]);
     }
 
-    /**
-     * Set the logo image for the QR code.
-     *
-     * @return $this
-     */
-    public function logo(?string $logo = null)
+    public function logo(?string $logo = null): static
     {
         return $this->withMeta(['logo' => $this->renderImage($logo)]);
     }
 
-    /**
-     * Set the size of the QR code for index view.
-     *
-     * @return $this
-     */
-    public function indexSize(int $size)
+    public function indexSize(int $size): static
     {
         return $this->withMeta(['indexSize' => $size]);
     }
 
-    /**
-     * Set the size of the QR code for detail view.
-     *
-     * @return $this
-     */
-    public function detailSize(int $size)
+    public function detailSize(int $size): static
     {
         return $this->withMeta(['detailSize' => $size]);
     }
 
-    /**
-     * Set the margin for the QR code.
-     *
-     * @return $this
-     */
-    public function margin(int $size)
+    public function margin(int $size): static
     {
         return $this->withMeta(['margin' => $size]);
     }
 
-    /**
-     * Render the image as a base64 encoded data URI.
-     *
-     * @return string|false
-     */
-    protected function renderImage(?string $url = null)
+    public function hideWhen(callable $callback): static
     {
-        if ($url && filter_var($url, FILTER_VALIDATE_URL)) {
-            return Cache::rememberForever('qr-img-'.md5($url), function () use ($url) {
-                $image = @file_get_contents($url);
-                if ($image === false) {
-                    return false;
-                }
+        $this->hideCallback = Closure::fromCallable($callback);
 
-                $fileInfo = new \finfo(FILEINFO_MIME_TYPE);
-                $mimeType = $fileInfo->buffer($image);
-
-                return 'data:'.$mimeType.';base64,'.base64_encode($image);
-            });
-        }
-
-        return false;
+        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function isHidden(): bool
+    {
+        if (! $this->hideCallback) {
+            return false;
+        }
+
+        if (! $this->resource) {
+            return false;
+        }
+
+        return (bool) call_user_func($this->hideCallback, $this->resource);
+    }
+
     public function jsonSerialize(): array
     {
-        $data = parent::jsonSerialize();
+        $hidden = $this->isHidden();
 
-        if (! empty($this->meta['hidden']) && is_callable($this->meta['hidden'])) {
-            $isHidden = call_user_func($this->meta['hidden'], $this->resource);
-            if ($isHidden) {
-                $data['value'] = null;
-            }
-        }
-
-        return array_merge($data, [
-            'value' => (string) $this->value,
+        return array_merge(parent::jsonSerialize(), [
+            'hidden' => $hidden,
+            'value' => $hidden ? null : (string) $this->value,
         ]);
     }
 
-    /**
-     * Hide the field when the given condition is met.
-     *
-     * @return $this
-     */
-    public function hideWhen(callable $callback)
+    protected function renderImage(?string $url = null): string|false
     {
-        return $this->withMeta([
-            'hidden' => function () use ($callback) {
-                $resource = $this->resource ?? null;
+        if (! $url) {
+            return false;
+        }
 
-                return $resource ? $callback($resource) : false;
-            },
-        ]);
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+
+        $cacheKey = 'qr-img-'.md5($url);
+
+        if ($cached = Cache::get($cacheKey)) {
+            return $cached;
+        }
+
+        $image = @file_get_contents($url);
+
+        if ($image === false) {
+            return false;
+        }
+
+        $mimeType = (new finfo(FILEINFO_MIME_TYPE))->buffer($image);
+
+        $dataUri = "data:{$mimeType};base64,".base64_encode($image);
+
+        Cache::forever($cacheKey, $dataUri);
+
+        return $dataUri;
     }
 }
