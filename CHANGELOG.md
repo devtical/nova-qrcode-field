@@ -2,6 +2,29 @@
 
 All notable changes to `nova-qrcode-field` will be documented in this file.
 
+## V2.0.7 - 2026-11-18
+
+### What's Changed
+
+* Fix hideWhen and XSS, support Laravel 13, add tests by @Kristories in https://github.com/devtical/nova-qrcode-field/pull/31
+
+#### Bug Fixes
+
+- **`hideWhen()` now works as expected.** Previously the field was always hidden as soon as `hideWhen()` was used, and the QR code value was still sent to the browser. The condition is now evaluated on the server. When it matches, the field is hidden and the value is not exposed.
+- **Fixed an XSS vulnerability.** The field value was injected into the page as raw HTML, so a crafted value could run scripts inside Nova. The QR image is now rendered safely through Vue bindings, and the download filename is sanitized.
+- **Failed image downloads are no longer cached forever.** If the URL passed to `logo()` or `background()` was temporarily unreachable, the failure stayed cached permanently. Only successful downloads are cached now, so failed ones are retried.
+
+#### Improvements
+
+- Added support for **Laravel 13**.
+- The downloaded PNG now uses the margin set with `->margin()` (default `5`).
+- Added a test suite. Run it with `composer test`.
+- Removed an unused npm dependency and rebuilt the assets.
+- Code cleanup: added return types, removed redundant docblocks, and updated the GitHub Actions versions.
+- Docs: fixed the Packagist badge links, added Requirements and Testing sections to the README, and removed the outdated `vue-qr` credit.
+
+**Full Changelog**: https://github.com/devtical/nova-qrcode-field/compare/v2.0.6...v2.0.7
+
 ## V2.0.6 - 2025-07-12
 
 ### What's Changed
