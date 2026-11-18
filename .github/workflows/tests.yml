@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -40,13 +40,21 @@ jobs:
           coverage: none
 
       - name: Configure Nova credentials
-        run: composer config http-basic.nova.laravel.com "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
+        env:
+          NOVA_USERNAME: ${{ secrets.NOVA_USERNAME }}
+          NOVA_LICENSE_KEY: ${{ secrets.NOVA_LICENSE_KEY }}
+        run: |
+          if [ -z "$NOVA_USERNAME" ] || [ -z "$NOVA_LICENSE_KEY" ]; then
+            echo "::error::Repository secrets NOVA_USERNAME and NOVA_LICENSE_KEY are required to install laravel/nova."
+            exit 1
+          fi
+          composer config http-basic.nova.laravel.com "$NOVA_USERNAME" "$NOVA_LICENSE_KEY"
 
       - name: Install dependencies
         run: |
           composer require "illuminate/support:${{ matrix.laravel }}" --no-interaction --no-update
           composer require "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update
-          composer update --prefer-dist --no-interaction -W
+          composer update --prefer-dist --no-interaction --no-security-blocking -W
 
       - name: Run tests
         run: vendor/bin/phpunit
